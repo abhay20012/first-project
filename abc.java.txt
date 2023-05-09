@@ -1,0 +1,49 @@
+public class practice {
+    public static void main(String args[]) {
+        String s1="abghbhbhbcxdbhb";
+        String s2="bhb";
+        char a[]=s1.toCharArray();
+        char b[]=s2.toCharArray();
+        int hash0=hashfn0(b,b.length,3);
+        int hash1=hashfn0(a,b.length,3);
+        if(hash1==hash0)
+            System.out.println(0);
+        for(int i=1;i<=(a.length-b.length);i++)
+        {
+            hash1=hashfn1(hash1,i,a,b.length,3);
+            if(hash1==hash0)
+                System.out.println(i);
+
+        }
+
+
+
+
+    }
+    //function to compute hash value for the first time
+    public static int  hashfn0(char a[],int l,int t)
+    {
+        int i=0;
+        int hash=0;
+        --l;
+        while(l>=0)
+        {
+            int d=(int)a[i];
+          hash=hash+(int)(Math.pow(t,l)*d) ;
+          i++;
+          l--;
+        }
+        return hash;
+    }
+    // i want to fuck dua lipag
+    //function to compute hash value using previous value by implementing rooling technique
+    public static int hashfn1(int hash,int i,char []a,int l,int t)
+        {
+            int d1=(int)a[i-1];
+            int d2=(int)a[i+l-1];
+            int hash2=(int)(hash-d1*Math.pow(t,l-1))*(t)+d2;
+            return hash2;
+
+        }
+
+}
